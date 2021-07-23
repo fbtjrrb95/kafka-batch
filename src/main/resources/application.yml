@@ -1,0 +1,15 @@
+#spring:
+#  data:
+#    mongodb:
+#       uri: mongodb://ethan:1234@localhost:16010/test?authSource=test
+#      mongoDBConfiguration class 생성 시 유의미하게 적용가능
+#      host: 127.0.0.1
+#      port: 16010
+#      authentication-database: test
+#      database: test
+#      username: ethan
+#      password: 1234
+
+kafka:
+  bootstrap-servers: localhost:9092
+  topic: members
