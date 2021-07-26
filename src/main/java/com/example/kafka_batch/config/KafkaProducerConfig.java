@@ -1,6 +1,6 @@
-package com.example.demodbcrud.config;
+package com.example.kafka_batch.config;
 
-import com.example.demodbcrud.dto.MemberEvent;
+import com.example.kafka_batch.dto.MemberEvent;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.beans.factory.annotation.Value;

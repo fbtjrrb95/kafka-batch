@@ -1,4 +1,4 @@
-package com.example.demodbcrud.dto;
+package com.example.kafka_batch.dto;
 
 public enum EventType {
     CREATE, UPDATE
