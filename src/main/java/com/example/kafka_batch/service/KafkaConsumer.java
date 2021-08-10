@@ -13,11 +13,14 @@ public class KafkaConsumer {
 
     @KafkaListener(topics="${kafka.topic}")
     public void receive(MemberEvent memberEvent){
+        try {
+            Thread.sleep(3000);
+            log.info("consume event "  + memberEvent.toString());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
-        log.info("consume event "  + memberEvent.toString());
         Member member = memberEvent.getMember();
-        log.info("message " + member.toString());
-
     }
 
 }

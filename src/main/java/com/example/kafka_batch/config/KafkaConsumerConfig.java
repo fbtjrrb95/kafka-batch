@@ -22,14 +22,17 @@ public class KafkaConsumerConfig {
     @Value("${kafka.bootstrap-servers}")
     private String bootstrapServers;
 
+    @Value("${kafka.topic}")
+    private String topicName;
+
     @Bean
     public Map<String, Object> consumerConfigs() {
         Map<String, Object> props = new HashMap<>();
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
-        props.put(ConsumerConfig.GROUP_ID_CONFIG, "member");
-        props.put(ConsumerConfig.HEARTBEAT_INTERVAL_MS_CONFIG, 500_000);
+        props.put(ConsumerConfig.GROUP_ID_CONFIG, topicName);
+        props.put(ConsumerConfig.HEARTBEAT_INTERVAL_MS_CONFIG, 5000);
         return props;
     }
 
