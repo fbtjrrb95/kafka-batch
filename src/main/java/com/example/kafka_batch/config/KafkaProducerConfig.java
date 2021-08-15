@@ -1,6 +1,5 @@
 package com.example.kafka_batch.config;
 
-import com.example.kafka_batch.dto.MemberEvent;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.beans.factory.annotation.Value;
@@ -31,13 +30,14 @@ public class KafkaProducerConfig {
     }
 
     @Bean
-    public ProducerFactory<String, MemberEvent> producerFactory() {
+    public ProducerFactory<String, ? extends Object> producerFactory() {
         return new DefaultKafkaProducerFactory<>(producerConfigs());
     }
 
     @Bean
-    public KafkaTemplate<String, MemberEvent> kafkaTemplate() {
+    public KafkaTemplate<String, ? extends Object> kafkaTemplate() {
         return new KafkaTemplate<>(producerFactory());
     }
+
 
 }
