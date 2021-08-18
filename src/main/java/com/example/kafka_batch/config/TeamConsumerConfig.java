@@ -1,6 +1,6 @@
 package com.example.kafka_batch.config;
 
-import com.example.kafka_batch.domain.TeamUser;
+import com.example.kafka_batch.domain.Team;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,16 +15,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Configuration
-public class KafkaTeamUserConsumerConfig {
-
+public class TeamConsumerConfig {
     @Value("${kafka.bootstrap-servers}")
     private String bootstrapServers;
 
-    @Value("${kafka.topic.teams-users}")
+    @Value("${kafka.topic.teams}")
     private String topicName;
 
     @Bean
-    public Map<String, Object> teamUserConsumerConfigs() {
+    public Map<String, Object> teamConsumerConfigs() {
         Map<String, Object> props = new HashMap<>();
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
@@ -34,17 +33,16 @@ public class KafkaTeamUserConsumerConfig {
     }
 
     @Bean
-    public ConsumerFactory<String, TeamUser> teamUserConsumerFactory() {
-        return new DefaultKafkaConsumerFactory<>(teamUserConsumerConfigs(), new StringDeserializer(),
-                new JsonDeserializer<>(TeamUser.class));
+    public ConsumerFactory<String, Team> teamConsumerFactory() {
+        return new DefaultKafkaConsumerFactory<>(teamConsumerConfigs(), new StringDeserializer(),
+                new JsonDeserializer<>(Team.class));
     }
 
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, TeamUser> kafkaListenerTeamUserContainerFactory() {
-        ConcurrentKafkaListenerContainerFactory<String, TeamUser> factory =
+    public ConcurrentKafkaListenerContainerFactory<String, Team> kafkaListenerTeamContainerFactory() {
+        ConcurrentKafkaListenerContainerFactory<String, Team> factory =
                 new ConcurrentKafkaListenerContainerFactory<>();
-        factory.setConsumerFactory(teamUserConsumerFactory());
+        factory.setConsumerFactory(teamConsumerFactory());
         return factory;
     }
-
 }

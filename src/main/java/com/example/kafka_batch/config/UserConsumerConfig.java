@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Configuration
-public class KafkaUserConsumerConfig {
+public class UserConsumerConfig {
 
     @Value("${kafka.bootstrap-servers}")
     private String bootstrapServers;

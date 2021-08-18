@@ -1,4 +1,4 @@
-package com.example.kafka_batch.service;
+package com.example.kafka_batch.producer;
 
 import com.example.kafka_batch.domain.User;
 import lombok.RequiredArgsConstructor;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class KafkaUsersProducer {
+public class UserProducer {
 
 
     @Value("${kafka.topic.users}")
