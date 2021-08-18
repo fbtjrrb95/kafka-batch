@@ -1,12 +1,12 @@
 package com.example.kafka_batch.domain;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 
-@Setter
-@Getter
+@Data
 @Table(name = "User")
 @Entity
 public class User extends Auditable{
