@@ -1,4 +1,4 @@
-package com.example.kafka_batch.config;
+package com.example.kafka_batch.config.producer;
 
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.beans.factory.annotation.Value;

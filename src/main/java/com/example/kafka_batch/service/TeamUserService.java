@@ -14,4 +14,10 @@ public class TeamUserService {
     public TeamUser save(TeamUser teamUser) {
         return teamUserRepository.save(teamUser);
     }
+    public TeamUser update(TeamUser teamUser) {
+        return teamUserRepository.save(teamUser);
+    }
+    public void delete(TeamUser teamUser) {
+         teamUserRepository.delete(teamUser);
+    }
 }

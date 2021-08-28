@@ -1,4 +1,4 @@
-package com.example.kafka_batch.config;
+package com.example.kafka_batch.config.consumer;
 
 import com.example.kafka_batch.domain.TeamUser;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
@@ -15,13 +15,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Configuration
-public class TeamUserConsumerConfig {
+public abstract class TeamUserConsumerConfig {
 
     @Value("${kafka.bootstrap-servers}")
     private String bootstrapServers;
 
-    @Value("${kafka.topic.teams-users}")
-    private String topicName;
+    public abstract String getTopicName();
 
     @Bean
     public Map<String, Object> teamUserConsumerConfigs() {
@@ -29,7 +28,7 @@ public class TeamUserConsumerConfig {
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
-        props.put(ConsumerConfig.GROUP_ID_CONFIG, topicName);
+        props.put(ConsumerConfig.GROUP_ID_CONFIG, getTopicName());
         return props;
     }
 
