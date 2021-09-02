@@ -9,10 +9,7 @@ import com.example.kafka_batch.producer.UserProducer;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
@@ -24,22 +21,63 @@ public class BatchController {
     private final TeamProducer teamsProducer;
     private final TeamUserProducer teamUserProducer;
 
-    @PostMapping("/users")
-    public ResponseEntity<User> batchUsers(@RequestBody User user) {
-        usersProducer.sendMessage(user);
+    // create
+    @PostMapping("/user")
+    public ResponseEntity<User> createUser(@RequestBody User user) {
+        usersProducer.publishCreateTopic(user);
         return ResponseEntity.ok(user);
     }
 
-    @PostMapping("/teams")
-    public ResponseEntity<Team> batchTeams(@RequestBody Team team) {
-        teamsProducer.sendMessage(team);
+    @PostMapping("/team")
+    public ResponseEntity<Team> createTeam(@RequestBody Team team) {
+        teamsProducer.publishCreateTopic(team);
         return ResponseEntity.ok(team);
     }
 
-    @PostMapping("/teams-users")
-    public ResponseEntity<TeamUser> batchTeamsUsers(@RequestBody TeamUser teamUser) {
-        teamUserProducer.sendMessage(teamUser);
+    @PostMapping("/team-user")
+    public ResponseEntity<TeamUser> createTeamUser(@RequestBody TeamUser teamUser) {
+        teamUserProducer.publishCreateTopic(teamUser);
         return ResponseEntity.ok(teamUser);
     }
+
+    // update
+    @PutMapping("/user")
+    public ResponseEntity<User> updateUser(@RequestBody User user) {
+        usersProducer.publishUpdateTopic(user);
+        return ResponseEntity.ok(user);
+    }
+
+    @PutMapping("/team")
+    public ResponseEntity<Team> updateTeam(@RequestBody Team team) {
+        teamsProducer.publishUpdateTopic(team);
+        return ResponseEntity.ok(team);
+    }
+
+    @PutMapping("/team-user")
+    public ResponseEntity<TeamUser> updateTeamUser(@RequestBody TeamUser teamUser) {
+        teamUserProducer.publishUpdateTopic(teamUser);
+        return ResponseEntity.ok(teamUser);
+    }
+
+    // delete
+    @DeleteMapping("/user")
+    public ResponseEntity<User> deleteUser(@RequestBody User user) {
+        usersProducer.publishDeleteTopic(user);
+        return ResponseEntity.ok(user);
+    }
+
+    @DeleteMapping("/team")
+    public ResponseEntity<Team> deleteTeam(@RequestBody Team team) {
+        teamsProducer.publishDeleteTopic(team);
+        return ResponseEntity.ok(team);
+    }
+
+    @DeleteMapping("/team-user")
+    public ResponseEntity<TeamUser> deleteTeamUser(@RequestBody TeamUser teamUser) {
+        teamUserProducer.publishDeleteTopic(teamUser);
+        return ResponseEntity.ok(teamUser);
+    }
+
+
 
 }
