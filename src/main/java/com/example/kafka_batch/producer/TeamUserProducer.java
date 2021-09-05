@@ -12,14 +12,30 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class TeamUserProducer {
 
-    @Value("${kafka.topic.teams-users}")
-    private String TOPIC;
+    @Value("${kafka.topic.teams-users.create}")
+    private String CREATE_TOPIC;
 
-    private final KafkaTemplate<String, TeamUser> kafkaTemplate;
+    @Value("${kafka.topic.teams-users.update}")
+    private String UPDATE_TOPIC;
 
-    public void sendMessage(TeamUser teamUser){
-        log.info("publish team {}", teamUser.toString());
-        this.kafkaTemplate.send(TOPIC, teamUser);
+    @Value("${kafka.topic.teams-users.delete}")
+    private String DELETE_TOPIC;
+
+    private final KafkaTemplate<String, TeamUser> teamUserKafkaTemplate;
+
+    public void publishCreateTopic(TeamUser teamUser){
+        log.info("publish teamUser and create teamUser {}", teamUser.toString());
+        this.teamUserKafkaTemplate.send(CREATE_TOPIC, teamUser);
+    }
+
+    public void publishUpdateTopic(TeamUser teamUser){
+        log.info("publish teamUser and update teamUser {}", teamUser.toString());
+        this.teamUserKafkaTemplate.send(UPDATE_TOPIC, teamUser);
+    }
+
+    public void publishDeleteTopic(TeamUser teamUser){
+        log.info("publish team and delete teamUser {}", teamUser.toString());
+        this.teamUserKafkaTemplate.send(DELETE_TOPIC, teamUser);
     }
 
 }

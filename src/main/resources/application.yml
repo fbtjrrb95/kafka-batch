@@ -1,10 +1,27 @@
 kafka:
   bootstrap-servers: 127.0.0.1:9092
+  group:
+    id:
+      users: users
+      teams: teams
+      teams-users: teams-users
   topic:
-    teams : teams
-    users: users
-    teams-users : teams-users
-    cafeteria : cafeteria
+    teams:
+      create: teams-create
+      update: teams-update
+      delete: teams-delete
+    users:
+      create: users-create
+      update: users-update
+      delete: users-delete
+    teams-users :
+      create: teams-users-create
+      update: teams-users-update
+      delete: teams-users-delete
+    cafeteria :
+      create: cafeteria-create
+      update: cafeteria-update
+      delete: cafeteria-delete
 
 
 spring:

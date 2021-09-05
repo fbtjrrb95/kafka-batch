@@ -14,11 +14,27 @@ public class TeamConsumer {
 
     private final TeamService teamService;
 
-    @KafkaListener(id = "teams", topics="${kafka.topic.teams}", containerFactory = "kafkaListenerTeamContainerFactory")
-    public void receive(Team team){
+    @KafkaListener(topics = "${kafka.topic.teams.create}", groupId = "${kafka.group.id.teams}", containerFactory = "teamKafkaListenerContainerFactory")
+    public void createTeam(Team team) {
 
-        log.info("consume team {} ", team.toString());
+        log.info("consume team and create team {} ", team.toString());
         teamService.save(team);
+
+    }
+
+    @KafkaListener(topics = "${kafka.topic.teams.update}", groupId = "${kafka.group.id.teams}", containerFactory = "teamKafkaListenerContainerFactory")
+    public void updateTeam(Team team) {
+
+        log.info("consume team and update team {} ", team.toString());
+        teamService.update(team);
+
+    }
+
+    @KafkaListener(topics = "${kafka.topic.teams.delete}", groupId = "${kafka.group.id.teams}", containerFactory = "teamKafkaListenerContainerFactory")
+    public void deleteTeam(Team team) {
+
+        log.info("consume team and delete team {} ", team.toString());
+        teamService.delete(team);
 
     }
 
