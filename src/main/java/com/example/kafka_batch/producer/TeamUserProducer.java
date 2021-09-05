@@ -21,21 +21,21 @@ public class TeamUserProducer {
     @Value("${kafka.topic.teams-users.delete}")
     private String DELETE_TOPIC;
 
-    private final KafkaTemplate<String, TeamUser> kafkaTemplate;
+    private final KafkaTemplate<String, TeamUser> teamUserKafkaTemplate;
 
     public void publishCreateTopic(TeamUser teamUser){
         log.info("publish teamUser and create teamUser {}", teamUser.toString());
-        this.kafkaTemplate.send(CREATE_TOPIC, teamUser);
+        this.teamUserKafkaTemplate.send(CREATE_TOPIC, teamUser);
     }
 
     public void publishUpdateTopic(TeamUser teamUser){
         log.info("publish teamUser and update teamUser {}", teamUser.toString());
-        this.kafkaTemplate.send(UPDATE_TOPIC, teamUser);
+        this.teamUserKafkaTemplate.send(UPDATE_TOPIC, teamUser);
     }
 
     public void publishDeleteTopic(TeamUser teamUser){
         log.info("publish team and delete teamUser {}", teamUser.toString());
-        this.kafkaTemplate.send(DELETE_TOPIC, teamUser);
+        this.teamUserKafkaTemplate.send(DELETE_TOPIC, teamUser);
     }
 
 }
