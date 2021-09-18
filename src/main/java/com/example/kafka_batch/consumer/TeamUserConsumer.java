@@ -14,11 +14,27 @@ public class TeamUserConsumer {
 
     private final TeamUserService teamUserService;
 
-    @KafkaListener(id = "teams-users", topics="${kafka.topic.teams-users}", containerFactory = "kafkaListenerTeamUserContainerFactory")
-    public void receive(TeamUser teamUser){
+    @KafkaListener(topics = "${kafka.topic.teams-users.create}", groupId = "${kafka.group.id.teams-users}", containerFactory = "teamUserKafkaListenerContainerFactory")
+    public void createTeamUser(TeamUser teamUser) {
 
-        log.info("consume teamUser  {} ", teamUser.toString());
+        log.info("consume teamUser and create teamUser {} ", teamUser.toString());
         teamUserService.save(teamUser);
+
+    }
+
+    @KafkaListener(topics = "${kafka.topic.teams-users.update}", groupId = "${kafka.group.id.teams-users}", containerFactory = "teamUserKafkaListenerContainerFactory")
+    public void updateTeamUser(TeamUser teamUser) {
+
+        log.info("consume teamUser and update teamUser{} ", teamUser.toString());
+        teamUserService.update(teamUser);
+
+    }
+
+    @KafkaListener(topics = "${kafka.topic.teams-users.delete}", groupId = "${kafka.group.id.teams-users}", containerFactory = "teamUserKafkaListenerContainerFactory")
+    public void deleteTeamUser(TeamUser teamUser) {
+
+        log.info("consume teamUser and delete teamUser {} ", teamUser.toString());
+        teamUserService.delete(teamUser);
 
     }
 }

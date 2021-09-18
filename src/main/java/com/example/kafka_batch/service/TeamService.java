@@ -14,4 +14,13 @@ public class TeamService {
     public Team save(Team team) {
         return teamRepository.save(team);
     }
+
+    public Team update(Team team) {
+        return teamRepository.save(team);
+    }
+
+    public void delete(Team team) {
+        teamRepository.delete(team);
+    }
+
 }
