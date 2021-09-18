@@ -38,4 +38,4 @@ spring:
       ddl-auto: update
 
 application:
-  version: 21.34.0
+  version: 21.39.0
