@@ -16,7 +16,7 @@ public class UserConsumer {
 
 
     @KafkaListener(topics = "${kafka.topic.users.create}", groupId = "${kafka.group.id.users}", containerFactory = "userKafkaListenerContainerFactory")
-    public void receiveMessage(User user) {
+    public void consumeCreateTopic(User user) {
 
         log.info("consume user and create user {} ", user.toString());
         userService.save(user);
@@ -32,7 +32,7 @@ public class UserConsumer {
     }
 
     @KafkaListener(topics = "${kafka.topic.users.delete}", groupId = "${kafka.group.id.users}", containerFactory = "userKafkaListenerContainerFactory")
-    public void deleteUser(User user) {
+    public void consumeDeleteTopic(User user) {
 
         log.info("consume user and delete user{} ", user.toString());
         userService.delete(user);

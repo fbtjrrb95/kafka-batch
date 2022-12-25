@@ -23,17 +23,17 @@ public class TeamProducer {
 
     private final KafkaTemplate<String, Team> teamKafkaTemplate;
 
-    public void publishCreateTopic(Team team){
+    public void publishCreateTopic(Team team) {
         log.info("publish team and create team {}", team.toString());
         this.teamKafkaTemplate.send(CREATE_TOPIC, team);
     }
 
-    public void publishUpdateTopic(Team team){
+    public void publishUpdateTopic(Team team) {
         log.info("publish team and update team {}", team.toString());
         this.teamKafkaTemplate.send(UPDATE_TOPIC, team);
     }
 
-    public void publishDeleteTopic(Team team){
+    public void publishDeleteTopic(Team team) {
         log.info("publish team and delete team {}", team.toString());
         this.teamKafkaTemplate.send(DELETE_TOPIC, team);
     }
