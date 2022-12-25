@@ -34,7 +34,7 @@ public class UserProducer {
         this.userKafkaTemplate.send(UPDATE_TOPIC, user);
     }
 
-    public void publishDeleteTopic(User user){
+    public void publishDeleteTopic(User user) {
         log.info(String.format("publish user and delete user {}", user.toString()));
         this.userKafkaTemplate.send(DELETE_TOPIC, user);
     }
